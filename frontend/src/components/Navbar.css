@@ -12,6 +12,7 @@
 .navbar-left {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .navbar-logo {
@@ -30,6 +31,35 @@
 
 .navbar-title {
   letter-spacing: 0.5px;
+}
+
+.role-switch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.role-link {
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  transition: all 0.2s ease;
+}
+
+.role-link:hover {
+  color: var(--green-dark);
+  border-color: var(--green-mid);
+}
+
+.role-link.active {
+  color: var(--white);
+  background-color: var(--green-mid);
+  border-color: var(--green-mid);
 }
 
 .navbar-center {
@@ -90,6 +120,7 @@
     width: 100%;
     order: 1;
     margin-bottom: 0.5rem;
+    justify-content: space-between;
   }
 
   .navbar-center {
@@ -111,5 +142,16 @@
 
   .user-name {
     font-size: 0.85rem;
+  }
+
+  .role-switch {
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .role-link {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
   }
 }

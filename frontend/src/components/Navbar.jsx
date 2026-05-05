@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 export default function Navbar({ dashboardName, userName, userRole }) {
@@ -8,6 +9,17 @@ export default function Navbar({ dashboardName, userName, userRole }) {
         <div className="navbar-logo">
           <span className="leaf-icon">🌿</span>
           <span className="navbar-title">FarmTrack</span>
+        </div>
+        <div className="role-switch">
+          <NavLink to="/vet" className="role-link">
+            Vet
+          </NavLink>
+          <NavLink to="/farmer" className="role-link">
+            Farmer
+          </NavLink>
+          <NavLink to="/authority" className="role-link">
+            Authority
+          </NavLink>
         </div>
       </div>
       
