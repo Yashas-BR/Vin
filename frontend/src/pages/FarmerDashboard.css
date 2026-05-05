@@ -1,0 +1,631 @@
+/* Farmer Dashboard — Mobile-First Responsive */
+
+/* Farm Summary Metrics */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+  min-width: 3rem;
+  text-align: center;
+}
+
+.metric-info {
+  flex: 1;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Runoff Risk Card */
+.runoff-card {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  border-left: 5px solid;
+}
+
+.runoff-card.runoff-green {
+  background-color: var(--green-light);
+  border-left-color: var(--green-dark);
+}
+
+.runoff-card.runoff-amber {
+  background-color: var(--amber-light);
+  border-left-color: var(--amber);
+}
+
+.runoff-card.runoff-red {
+  background-color: var(--red-light);
+  border-left-color: var(--red);
+}
+
+.runoff-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
+.runoff-left {
+  font-size: 2rem;
+}
+
+.runoff-icon {
+  display: block;
+}
+
+.runoff-middle h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.runoff-status,
+.runoff-forecast {
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.runoff-right {
+  display: none;
+}
+
+.risk-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.risk-circle.risk-green {
+  background-color: var(--green-dark);
+}
+
+.risk-circle.risk-amber {
+  background-color: var(--amber);
+}
+
+.risk-circle.risk-red {
+  background-color: var(--red);
+}
+
+.runoff-recommendation {
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.runoff-recommendation p {
+  margin: 0;
+}
+
+/* Herd Status Cards */
+.herd-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.herd-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  text-align: center;
+  gap: var(--spacing-sm);
+}
+
+.herd-icon {
+  font-size: 2.5rem;
+}
+
+.herd-species {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.herd-count {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Active Treatments List */
+.treatments-list-farmer {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg);
+}
+
+.treatments-list-farmer h3 {
+  color: var(--green-dark);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.treatment-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.treatment-item-farmer {
+  padding: var(--spacing-md);
+  background-color: var(--background);
+  border-radius: 6px;
+  border-left: 4px solid var(--green-mid);
+}
+
+.treatment-header-farmer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: var(--spacing-md);
+}
+
+.treatment-header-farmer strong {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.treatment-detail {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Alert Feed */
+.alert-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.alert-filters {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-md);
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.filter-btn:hover {
+  border-color: var(--green-mid);
+  color: var(--green-mid);
+}
+
+.filter-btn.active {
+  background-color: var(--green-mid);
+  color: var(--white);
+  border-color: var(--green-mid);
+}
+
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.empty-alerts {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.alert-item {
+  padding: var(--spacing-md);
+  background-color: var(--white);
+  border-radius: 6px;
+  border-left: 4px solid;
+}
+
+.alert-header {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.alert-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.alert-message {
+  margin: 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.alert-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.alert-farm {
+  font-weight: 600;
+}
+
+/* Chatbot */
+.chatbot-container {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 100;
+}
+
+.chatbot-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--green-mid);
+  color: var(--white);
+  border: none;
+  font-size: 1.75rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(27, 94, 32, 0.3);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-button:hover {
+  background-color: var(--green-dark);
+  box-shadow: 0 6px 16px rgba(27, 94, 32, 0.4);
+  transform: scale(1.05);
+}
+
+.chatbot-button:active {
+  transform: scale(0.95);
+}
+
+.chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 300px;
+  max-height: 500px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  background-color: var(--green-mid);
+  color: var(--white);
+  padding: var(--spacing-md);
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.header-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.language-select {
+  padding: 0.3rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.language-select option {
+  color: var(--text-primary);
+  background-color: var(--white);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  opacity: 0.8;
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.message {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+.message.user .message-bubble {
+  background-color: var(--green-mid);
+  color: var(--white);
+}
+
+.message.bot .message-bubble {
+  background-color: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.chatbot-input-area {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--border);
+  background-color: var(--white);
+}
+
+.chatbot-input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.chatbot-input:focus {
+  outline: none;
+  border-color: var(--green-mid);
+}
+
+.send-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--green-mid);
+  color: var(--white);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.send-btn:hover {
+  background-color: var(--green-dark);
+}
+
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+/* Sections */
+.section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section h2 {
+  color: var(--green-dark);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border);
+}
+
+/* Tablet (640px) */
+@media (min-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .herd-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .runoff-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .runoff-left {
+    font-size: 2.5rem;
+  }
+
+  .runoff-middle {
+    flex: 1;
+    margin: 0 var(--spacing-lg);
+  }
+
+  .runoff-right {
+    display: block;
+  }
+
+  .chatbot-window {
+    width: 350px;
+  }
+}
+
+/* Desktop (768px+) */
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .herd-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .chatbot-container {
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+  }
+
+  .chatbot-window {
+    width: 380px;
+    max-height: 600px;
+  }
+}
+
+/* Large desktop (1400px+) */
+@media (min-width: 1400px) {
+  .chatbot-window {
+    width: 400px;
+  }
+}
+
+/* Mobile optimization - reduce padding for small screens */
+@media (max-width: 375px) {
+  .metric-card,
+  .herd-card,
+  .alert-item,
+  .treatment-item-farmer {
+    padding: var(--spacing-md);
+  }
+
+  .runoff-card {
+    padding: var(--spacing-md);
+  }
+
+  .metric-icon,
+  .herd-icon {
+    font-size: 1.75rem;
+  }
+
+  .metric-value {
+    font-size: 1.25rem;
+  }
+
+  .chatbot-window {
+    width: 280px;
+    max-height: 400px;
+  }
+
+  .chatbot-button {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+}
