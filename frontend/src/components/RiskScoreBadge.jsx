@@ -11,7 +11,10 @@ export default function RiskScoreBadge({ score }) {
   else label = 'High Risk';
 
   return (
-    <div className={`risk-score-badge risk-score-${Math.ceil(scoreNum)}`}>
+    <div
+      className={`risk-score-badge risk-score-${Math.ceil(scoreNum)}`}
+      title={`Runoff risk: ${label} (${scoreNum.toFixed(1)}/10)`}
+    >
       {scoreNum.toFixed(1)}
     </div>
   );

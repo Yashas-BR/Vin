@@ -28,6 +28,7 @@ export default function VetDashboard() {
   const [animals, setAnimals] = useState([]);
   const [formSuccess, setFormSuccess] = useState(null);
   const [formError, setFormError] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -78,6 +79,7 @@ export default function VetDashboard() {
     const farmId = parseInt(e.target.value);
     setFormData({ ...formData, farm_id: farmId, animal_id: '' });
     setSelectedFarm(farms.find(f => f.id === farmId));
+    setFormErrors(prev => ({ ...prev, farm_id: '' }));
     fetchAnimalsByFarm(farmId);
   };
 
@@ -86,11 +88,13 @@ export default function VetDashboard() {
     const med = medicines.find(m => m.id === medId);
     setFormData({ ...formData, medicine_id: medId });
     setSelectedMedicine(med);
+    setFormErrors(prev => ({ ...prev, medicine_id: '' }));
   };
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setFormErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleFormSubmit = async (e) => {
@@ -98,8 +102,22 @@ export default function VetDashboard() {
     setFormError(null);
     setFormSuccess(null);
 
-    if (!formData.farm_id || !formData.medicine_id || !formData.dosage || !formData.duration_days) {
-      setFormError('Please fill in all required fields');
+    const nextErrors = {};
+    if (!formData.farm_id) nextErrors.farm_id = 'Farm is required';
+    if (!formData.medicine_id) nextErrors.medicine_id = 'Medicine is required';
+    if (!formData.dosage.trim()) nextErrors.dosage = 'Dosage is required';
+
+    const durationNum = parseInt(formData.duration_days, 10);
+    if (!formData.duration_days) nextErrors.duration_days = 'Duration is required';
+    else if (Number.isNaN(durationNum) || durationNum <= 0) nextErrors.duration_days = 'Duration must be a positive number';
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    if (!formData.treatment_date) nextErrors.treatment_date = 'Treatment date is required';
+    else if (formData.treatment_date > todayStr) nextErrors.treatment_date = 'Treatment date cannot be in the future';
+
+    if (Object.keys(nextErrors).length > 0) {
+      setFormErrors(nextErrors);
+      setFormError('Please fix the highlighted fields');
       return;
     }
 
@@ -162,7 +180,10 @@ export default function VetDashboard() {
           userRole="vet"
         />
         <div className="dashboard-content">
-          <div className="loading">Loading dashboard...</div>
+          <div className="loading">
+            <span className="spinner" aria-hidden="true" />
+            Loading dashboard...
+          </div>
         </div>
       </div>
     );
@@ -176,44 +197,58 @@ export default function VetDashboard() {
         userRole="vet"
       />
       <div className="dashboard-content">
-        {error && <div className="alert alert-error">❌ {error}</div>}
+        {error && (
+          <div className="alert alert-error">
+            <span>❌ {error}</span>
+            <div className="alert-actions">
+              <button className="btn-secondary btn-retry" onClick={fetchData}>Retry</button>
+            </div>
+          </div>
+        )}
 
         {/* Section 1: My Farms */}
         <section className="section">
           <h2>My Farms</h2>
-          <div className="farm-grid">
-            {farms.map(farm => (
-              <div key={farm.id} className="farm-card card">
-                <h3>{farm.name}</h3>
-                <p className="farm-detail">
-                  <span className="label">Farmer:</span>
-                  {farm.farmer_name}
-                </p>
-                <p className="farm-detail">
-                  <span className="label">{farm.district}, {farm.country}</span>
-                </p>
-                <div className="farm-stats">
-                  <div className="stat">
-                    <span className="stat-label">Active Treatments</span>
-                    <span className="stat-value badge badge-warning">
-                      {activeTreatments.filter(t => t.farm_id === farm.id).length}
-                    </span>
+          {farms.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-state-icon">🏠</div>
+              <p>No farms assigned</p>
+            </div>
+          ) : (
+            <div className="farm-grid">
+              {farms.map(farm => (
+                <div key={farm.id} className="farm-card card">
+                  <h3>{farm.name}</h3>
+                  <p className="farm-detail">
+                    <span className="label">Farmer:</span>
+                    {farm.farmer_name}
+                  </p>
+                  <p className="farm-detail">
+                    <span className="label">{farm.district}, {farm.country}</span>
+                  </p>
+                  <div className="farm-stats">
+                    <div className="stat">
+                      <span className="stat-label">Active Treatments</span>
+                      <span className="stat-value badge badge-warning">
+                        {activeTreatments.filter(t => t.farm_id === farm.id).length}
+                      </span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-label">Latest Risk</span>
+                      <RiskScoreBadge 
+                        score={activeTreatments
+                          .filter(t => t.farm_id === farm.id)
+                          .reduce((max, t) => Math.max(max, parseFloat(t.runoff_risk_score)), 0)}
+                      />
+                    </div>
                   </div>
-                  <div className="stat">
-                    <span className="stat-label">Latest Risk</span>
-                    <RiskScoreBadge 
-                      score={activeTreatments
-                        .filter(t => t.farm_id === farm.id)
-                        .reduce((max, t) => Math.max(max, parseFloat(t.runoff_risk_score)), 0)}
-                    />
-                  </div>
+                  <button className="btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
+                    View Farm
+                  </button>
                 </div>
-                <button className="btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
-                  View Farm
-                </button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Section 2: Log New Treatment */}
@@ -238,6 +273,7 @@ export default function VetDashboard() {
                   value={formData.farm_id}
                   onChange={handleFarmChange}
                   required
+                  className={formErrors.farm_id ? 'input-error' : ''}
                 >
                   <option value="">Choose a farm...</option>
                   {farms.map(farm => (
@@ -246,6 +282,7 @@ export default function VetDashboard() {
                     </option>
                   ))}
                 </select>
+                {formErrors.farm_id && <div className="field-error">{formErrors.farm_id}</div>}
               </div>
 
               <div className="form-group">
@@ -272,6 +309,7 @@ export default function VetDashboard() {
                   value={formData.medicine_id}
                   onChange={handleMedicineChange}
                   required
+                  className={formErrors.medicine_id ? 'input-error' : ''}
                 >
                   <option value="">Choose a medicine...</option>
                   {medicines.map(med => (
@@ -280,6 +318,13 @@ export default function VetDashboard() {
                     </option>
                   ))}
                 </select>
+                {formErrors.medicine_id && <div className="field-error">{formErrors.medicine_id}</div>}
+                {medicines.length === 0 && (
+                  <div className="empty-state empty-inline">
+                    <div className="empty-state-icon">💊</div>
+                    <p>No medicines available</p>
+                  </div>
+                )}
               </div>
 
               {selectedMedicine && (
@@ -296,7 +341,9 @@ export default function VetDashboard() {
                     value={formData.dosage}
                     onChange={handleFormChange}
                     required
+                    className={formErrors.dosage ? 'input-error' : ''}
                   />
+                  {formErrors.dosage && <div className="field-error">{formErrors.dosage}</div>}
                 </div>
                 <div className="form-group">
                   <label>Route *</label>
@@ -321,7 +368,9 @@ export default function VetDashboard() {
                     value={formData.duration_days}
                     onChange={handleFormChange}
                     required
+                    className={formErrors.duration_days ? 'input-error' : ''}
                   />
+                  {formErrors.duration_days && <div className="field-error">{formErrors.duration_days}</div>}
                 </div>
               </div>
 
@@ -334,7 +383,9 @@ export default function VetDashboard() {
                     value={formData.treatment_date}
                     onChange={handleFormChange}
                     required
+                    className={formErrors.treatment_date ? 'input-error' : ''}
                   />
+                  {formErrors.treatment_date && <div className="field-error">{formErrors.treatment_date}</div>}
                 </div>
               </div>
 

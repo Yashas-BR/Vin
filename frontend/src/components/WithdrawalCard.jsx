@@ -6,16 +6,22 @@ export default function WithdrawalCard({ medicine }) {
   return (
     <div className="withdrawal-info">
       <div className="withdrawal-row">
-        <span className="label">Withdrawal (Milk):</span>
+        <span className="label tooltip" data-tooltip="Days before milk can be safely sold">
+          Withdrawal (Milk):
+        </span>
         <span className="value">{medicine.withdrawal_days_milk} days</span>
       </div>
       <div className="withdrawal-row">
-        <span className="label">Withdrawal (Meat):</span>
+        <span className="label tooltip" data-tooltip="Days before meat can be safely sold">
+          Withdrawal (Meat):
+        </span>
         <span className="value">{medicine.withdrawal_days_meat} days</span>
       </div>
       <div className="withdrawal-row">
-        <span className="label">Environmental Risk:</span>
-        <span className={`badge badge-${medicine.environmental_risk}`}>
+        <span className="label tooltip" data-tooltip="Environmental impact level of this medicine">
+          Environmental Risk:
+        </span>
+        <span className={`badge badge-${medicine.environmental_risk}`} title="Low, medium, or high impact">
           {medicine.environmental_risk}
         </span>
       </div>

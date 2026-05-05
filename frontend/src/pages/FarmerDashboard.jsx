@@ -56,7 +56,10 @@ export default function FarmerDashboard() {
           userRole="farmer"
         />
         <div className="dashboard-content">
-          <div className="loading">Loading your farm data...</div>
+          <div className="loading">
+            <span className="spinner" aria-hidden="true" />
+            Loading your farm data...
+          </div>
         </div>
       </div>
     );
@@ -104,7 +107,14 @@ export default function FarmerDashboard() {
         userRole="farmer"
       />
       <div className="dashboard-content">
-        {error && <div className="alert alert-error">❌ {error}</div>}
+        {error && (
+          <div className="alert alert-error">
+            <span>❌ {error}</span>
+            <div className="alert-actions">
+              <button className="btn-secondary btn-retry" onClick={fetchData}>Retry</button>
+            </div>
+          </div>
+        )}
 
         {/* Section 1: Farm Summary Metrics */}
         <section className="section">
@@ -160,6 +170,7 @@ export default function FarmerDashboard() {
                 <p className="runoff-forecast">
                   🌧️ Tomorrow: <strong>{rainTomorrow}mm rain expected</strong>
                 </p>
+                {!weather && <p className="subtle-text">Forecast data unavailable</p>}
               </div>
               <div className="runoff-right">
                 <div className={`risk-circle risk-${runoffAlertColor}`}>
@@ -241,6 +252,12 @@ export default function FarmerDashboard() {
                   );
                 })}
               </div>
+            </div>
+          )}
+          {treatments.length === 0 && (
+            <div className="empty-state">
+              <div className="empty-state-icon">📋</div>
+              <p>No active treatments</p>
             </div>
           )}
         </section>

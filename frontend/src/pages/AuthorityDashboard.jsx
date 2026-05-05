@@ -118,7 +118,10 @@ export default function AuthorityDashboard() {
           userRole="authority"
         />
         <div className="dashboard-content">
-          <div className="loading">Loading regional data...</div>
+          <div className="loading">
+            <span className="spinner" aria-hidden="true" />
+            Loading regional data...
+          </div>
         </div>
       </div>
     );
@@ -134,10 +137,17 @@ export default function AuthorityDashboard() {
         userRole="authority"
       />
       <div className="dashboard-content">
-        {error && <div className="alert alert-error">❌ {error}</div>}
+        {error && (
+          <div className="alert alert-error">
+            <span>❌ {error}</span>
+            <div className="alert-actions">
+              <button className="btn-secondary btn-retry" onClick={fetchData}>Retry</button>
+            </div>
+          </div>
+        )}
 
         {/* Section 1: Summary Stats Bar */}
-        {stats && (
+        {stats ? (
           <section className="section stats-section">
             <h2>Regional Summary</h2>
             <div className="stats-bar">
@@ -172,6 +182,14 @@ export default function AuthorityDashboard() {
                   <p className="stat-value">{stats.countries}</p>
                 </div>
               </div>
+            </div>
+          </section>
+        ) : (
+          <section className="section stats-section">
+            <h2>Regional Summary</h2>
+            <div className="empty-state">
+              <div className="empty-state-icon">📊</div>
+              <p>No summary data available</p>
             </div>
           </section>
         )}
@@ -364,6 +382,7 @@ export default function AuthorityDashboard() {
                           <td>
                             <div
                               className="risk-score-display"
+                              title="Runoff risk score (1-10)"
                               style={{
                                 backgroundColor: riskScore >= 7 ? '#C62828' : riskScore >= 5 ? '#F57F17' : '#2E7D32',
                                 color: 'white',
