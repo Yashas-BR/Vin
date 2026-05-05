@@ -114,9 +114,7 @@ No login required — dashboards are directly accessible via URL.
 - `REACT_APP_API_URL`: Backend API URL (http://localhost:5000)
 - `REACT_APP_GEMINI_API_KEY`: Gemini API key (optional, shows placeholder if not set)
 
-## Team
 
-RVU Crew
 
 ## License
 
