@@ -1,0 +1,115 @@
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--green-dark);
+  cursor: pointer;
+}
+
+.leaf-icon {
+  font-size: 1.5rem;
+}
+
+.navbar-title {
+  letter-spacing: 0.5px;
+}
+
+.navbar-center {
+  flex: 1;
+  text-align: center;
+}
+
+.dashboard-name {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.role-badge {
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.role-vet {
+  background-color: var(--green-light);
+  color: var(--green-dark);
+}
+
+.role-farmer {
+  background-color: var(--blue-light);
+  color: var(--blue-dark);
+}
+
+.role-authority {
+  background-color: var(--amber-light);
+  color: var(--amber);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar-left {
+    width: 100%;
+    order: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar-center {
+    width: 100%;
+    order: 3;
+    margin-top: 0.5rem;
+  }
+
+  .navbar-right {
+    width: 100%;
+    order: 2;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .dashboard-name {
+    font-size: 1rem;
+  }
+
+  .user-name {
+    font-size: 0.85rem;
+  }
+}
